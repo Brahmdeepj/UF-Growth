@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		ED8BA739186914CE0014A054 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA738186914CE0014A054 /* main.cpp */; };
 		ED8BA73B186914CE0014A054 /* _710_UFTree.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = ED8BA73A186914CE0014A054 /* _710_UFTree.1 */; };
+		ED8BA77E186916480014A054 /* DLinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA773186916480014A054 /* DLinkedList.cpp */; };
+		ED8BA77F186916480014A054 /* FPTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA774186916480014A054 /* FPTree.cpp */; };
+		ED8BA780186916480014A054 /* FPTreeItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA775186916480014A054 /* FPTreeItem.cpp */; };
+		ED8BA781186916480014A054 /* FPTreeNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA776186916480014A054 /* FPTreeNode.cpp */; };
+		ED8BA782186916480014A054 /* HeaderItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA777186916480014A054 /* HeaderItem.cpp */; };
+		ED8BA783186916480014A054 /* HeaderItemList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA778186916480014A054 /* HeaderItemList.cpp */; };
+		ED8BA784186916480014A054 /* HeaderTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA779186916480014A054 /* HeaderTable.cpp */; };
+		ED8BA785186916480014A054 /* NodeLL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA77A186916480014A054 /* NodeLL.cpp */; };
+		ED8BA786186916480014A054 /* OrderedData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA77B186916480014A054 /* OrderedData.cpp */; };
+		ED8BA787186916480014A054 /* TransPathItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA77C186916480014A054 /* TransPathItem.cpp */; };
+		ED8BA78A186916660014A054 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED8BA789186916660014A054 /* test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +39,30 @@
 		ED8BA735186914CE0014A054 /* 4710-UFTree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "4710-UFTree"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED8BA738186914CE0014A054 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		ED8BA73A186914CE0014A054 /* _710_UFTree.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = _710_UFTree.1; sourceTree = "<group>"; };
+		ED8BA767186916320014A054 /* DLinkedList.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DLinkedList.hpp; sourceTree = "<group>"; };
+		ED8BA768186916320014A054 /* FPContants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FPContants.hpp; sourceTree = "<group>"; };
+		ED8BA769186916320014A054 /* FPTree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FPTree.hpp; sourceTree = "<group>"; };
+		ED8BA76A186916320014A054 /* FPTreeItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FPTreeItem.hpp; sourceTree = "<group>"; };
+		ED8BA76B186916320014A054 /* FPTreeNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FPTreeNode.hpp; sourceTree = "<group>"; };
+		ED8BA76C186916320014A054 /* HeaderItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HeaderItem.hpp; sourceTree = "<group>"; };
+		ED8BA76D186916320014A054 /* HeaderItemList.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HeaderItemList.hpp; sourceTree = "<group>"; };
+		ED8BA76E186916320014A054 /* HeaderTable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HeaderTable.hpp; sourceTree = "<group>"; };
+		ED8BA76F186916320014A054 /* NodeLL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NodeLL.hpp; sourceTree = "<group>"; };
+		ED8BA770186916320014A054 /* OrderedData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OrderedData.hpp; sourceTree = "<group>"; };
+		ED8BA771186916320014A054 /* TransPathItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TransPathItem.hpp; sourceTree = "<group>"; };
+		ED8BA773186916480014A054 /* DLinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DLinkedList.cpp; sourceTree = "<group>"; };
+		ED8BA774186916480014A054 /* FPTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FPTree.cpp; sourceTree = "<group>"; };
+		ED8BA775186916480014A054 /* FPTreeItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FPTreeItem.cpp; sourceTree = "<group>"; };
+		ED8BA776186916480014A054 /* FPTreeNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FPTreeNode.cpp; sourceTree = "<group>"; };
+		ED8BA777186916480014A054 /* HeaderItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeaderItem.cpp; sourceTree = "<group>"; };
+		ED8BA778186916480014A054 /* HeaderItemList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeaderItemList.cpp; sourceTree = "<group>"; };
+		ED8BA779186916480014A054 /* HeaderTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeaderTable.cpp; sourceTree = "<group>"; };
+		ED8BA77A186916480014A054 /* NodeLL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NodeLL.cpp; sourceTree = "<group>"; };
+		ED8BA77B186916480014A054 /* OrderedData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OrderedData.cpp; sourceTree = "<group>"; };
+		ED8BA77C186916480014A054 /* TransPathItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransPathItem.cpp; sourceTree = "<group>"; };
+		ED8BA788186916660014A054 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		ED8BA789186916660014A054 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
+		ED8BA78C18692A8A0014A054 /* un_test1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = un_test1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +79,7 @@
 		ED8BA72C186914CE0014A054 = {
 			isa = PBXGroup;
 			children = (
+				ED8BA78B18692A1B0014A054 /* test_files */,
 				ED8BA737186914CE0014A054 /* 4710-UFTree */,
 				ED8BA736186914CE0014A054 /* Products */,
 			);
@@ -60,10 +96,41 @@
 		ED8BA737186914CE0014A054 /* 4710-UFTree */ = {
 			isa = PBXGroup;
 			children = (
-				ED8BA738186914CE0014A054 /* main.cpp */,
+				ED8BA788186916660014A054 /* test.h */,
+				ED8BA789186916660014A054 /* test.cpp */,
 				ED8BA73A186914CE0014A054 /* _710_UFTree.1 */,
+				ED8BA738186914CE0014A054 /* main.cpp */,
+				ED8BA773186916480014A054 /* DLinkedList.cpp */,
+				ED8BA774186916480014A054 /* FPTree.cpp */,
+				ED8BA775186916480014A054 /* FPTreeItem.cpp */,
+				ED8BA776186916480014A054 /* FPTreeNode.cpp */,
+				ED8BA777186916480014A054 /* HeaderItem.cpp */,
+				ED8BA778186916480014A054 /* HeaderItemList.cpp */,
+				ED8BA779186916480014A054 /* HeaderTable.cpp */,
+				ED8BA77A186916480014A054 /* NodeLL.cpp */,
+				ED8BA77B186916480014A054 /* OrderedData.cpp */,
+				ED8BA77C186916480014A054 /* TransPathItem.cpp */,
+				ED8BA767186916320014A054 /* DLinkedList.hpp */,
+				ED8BA768186916320014A054 /* FPContants.hpp */,
+				ED8BA769186916320014A054 /* FPTree.hpp */,
+				ED8BA76A186916320014A054 /* FPTreeItem.hpp */,
+				ED8BA76B186916320014A054 /* FPTreeNode.hpp */,
+				ED8BA76C186916320014A054 /* HeaderItem.hpp */,
+				ED8BA76D186916320014A054 /* HeaderItemList.hpp */,
+				ED8BA76E186916320014A054 /* HeaderTable.hpp */,
+				ED8BA76F186916320014A054 /* NodeLL.hpp */,
+				ED8BA770186916320014A054 /* OrderedData.hpp */,
+				ED8BA771186916320014A054 /* TransPathItem.hpp */,
 			);
 			path = "4710-UFTree";
+			sourceTree = "<group>";
+		};
+		ED8BA78B18692A1B0014A054 /* test_files */ = {
+			isa = PBXGroup;
+			children = (
+				ED8BA78C18692A8A0014A054 /* un_test1.txt */,
+			);
+			name = test_files;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,7 +184,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED8BA780186916480014A054 /* FPTreeItem.cpp in Sources */,
+				ED8BA785186916480014A054 /* NodeLL.cpp in Sources */,
+				ED8BA787186916480014A054 /* TransPathItem.cpp in Sources */,
 				ED8BA739186914CE0014A054 /* main.cpp in Sources */,
+				ED8BA77F186916480014A054 /* FPTree.cpp in Sources */,
+				ED8BA786186916480014A054 /* OrderedData.cpp in Sources */,
+				ED8BA781186916480014A054 /* FPTreeNode.cpp in Sources */,
+				ED8BA77E186916480014A054 /* DLinkedList.cpp in Sources */,
+				ED8BA78A186916660014A054 /* test.cpp in Sources */,
+				ED8BA784186916480014A054 /* HeaderTable.cpp in Sources */,
+				ED8BA782186916480014A054 /* HeaderItem.cpp in Sources */,
+				ED8BA783186916480014A054 /* HeaderItemList.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
