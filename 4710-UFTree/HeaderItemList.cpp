@@ -42,14 +42,23 @@ HeaderItem* HeaderItemList::insertByExpSupport(HeaderItem *item)
     }else {
         
         if( item != NULL && item->getData() != NULL) {
+            
+            // extract node containing same domain item
             extractedNode = extract(item->getData()->getData());
+            
+            // new item 
             if(extractedNode==NULL) {
                 targetItem = item;
                 orderedInsert(item);
             }else {
+                // DEBUG memory check for item
                 targetItem = (HeaderItem*)extractedNode->getData();
                 targetItem->increaseSupport(item->getData()->getSupport());
+                targetItem->increaseExpSuport(item->getExpSupport()); 
                 orderedInsert(targetItem);
+                
+                // DEBUG check
+                delete item;
             }
         }
     }
@@ -160,19 +169,17 @@ void HeaderItemList::removeInfrequent(float minsup)
 {
     NodeLL *curr = head;
     HeaderItem *currHItem = NULL;
-    FPTreeItem *currItem = NULL;
     NodeLL *tempNext = NULL;
     int infreqId = 0;
     
     while (curr!=NULL)
     {
         currHItem = (HeaderItem*)curr->getData();
-        currItem = (FPTreeItem*)currHItem->getData();
         
         // get next pointer as this node might get destroyed if infreq
         tempNext = curr->getNext();
         
-        if(currItem !=NULL && currItem->getSupport() < minsup)
+        if(currHItem !=NULL && currHItem->getExpSupport() < minsup)
             infreqId++;
         
         if(infreqId>=1) {

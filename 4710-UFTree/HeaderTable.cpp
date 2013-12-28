@@ -61,10 +61,14 @@ void HeaderTable::removeInfrequent()
  * PARM   :
  * RETURN :
  *-----------------------------------------------------------------------------------*/
-HeaderItem* HeaderTable::insertByExpSupport(int domainItem, int support, float probability)
+HeaderItem* HeaderTable::insertByExpSupport(int domainItem, int support, float probability, float baseProbability)
 {
-    HeaderItem *newItem = new HeaderItem(new FPTreeItem(domainItem, support, probability));
+    HeaderItem *newItem = new HeaderItem(new FPTreeItem(domainItem, support, probability), baseProbability);
     HeaderItem *returned = headerItems->insertByExpSupport(newItem);
+    
+//    // if new item then increase expected support
+//    if(newItem != returned)
+//        returned->increaseExpSuport(baseProbability * probability * support);
     
     return returned;
 }

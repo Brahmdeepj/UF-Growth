@@ -89,7 +89,7 @@ bool FPTreeItem::isEqualsTo(OrderedData *target){
  * PURPOSE: prints data item and frequency
  *-----------------------------------------------------------------------------------*/
 void FPTreeItem::print(){
-    cout << this->data << " : " << this->support << " : " << probability;
+    cout << this->data << " : " << this->support << " : " << this->probability;
 }
 
 //************** GETTERS ***********************

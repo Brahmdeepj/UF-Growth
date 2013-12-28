@@ -36,6 +36,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6BB65F43186B731F0047A05C /* un_test1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = un_test1.txt; sourceTree = "<group>"; };
+		6BB65F44186B77690047A05C /* un_test2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = un_test2.txt; path = test_files/un_test2.txt; sourceTree = "<group>"; };
+		6BB65F45186EB9660047A05C /* u10k5L10100.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = u10k5L10100.txt; sourceTree = "<group>"; };
+		6BB65F46186EB9810047A05C /* u1k5L10100.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = u1k5L10100.txt; sourceTree = "<group>"; };
 		ED8BA735186914CE0014A054 /* 4710-UFTree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "4710-UFTree"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED8BA738186914CE0014A054 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		ED8BA73A186914CE0014A054 /* _710_UFTree.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = _710_UFTree.1; sourceTree = "<group>"; };
@@ -62,7 +66,6 @@
 		ED8BA77C186916480014A054 /* TransPathItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransPathItem.cpp; sourceTree = "<group>"; };
 		ED8BA788186916660014A054 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		ED8BA789186916660014A054 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
-		ED8BA78C18692A8A0014A054 /* un_test1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = un_test1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,10 +79,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6BB65F42186B72F20047A05C /* test_files */ = {
+			isa = PBXGroup;
+			children = (
+				6BB65F46186EB9810047A05C /* u1k5L10100.txt */,
+				6BB65F45186EB9660047A05C /* u10k5L10100.txt */,
+				6BB65F43186B731F0047A05C /* un_test1.txt */,
+				6BB65F44186B77690047A05C /* un_test2.txt */,
+			);
+			name = test_files;
+			sourceTree = "<group>";
+		};
 		ED8BA72C186914CE0014A054 = {
 			isa = PBXGroup;
 			children = (
-				ED8BA78B18692A1B0014A054 /* test_files */,
+				6BB65F42186B72F20047A05C /* test_files */,
 				ED8BA737186914CE0014A054 /* 4710-UFTree */,
 				ED8BA736186914CE0014A054 /* Products */,
 			);
@@ -96,41 +110,33 @@
 		ED8BA737186914CE0014A054 /* 4710-UFTree */ = {
 			isa = PBXGroup;
 			children = (
-				ED8BA788186916660014A054 /* test.h */,
-				ED8BA789186916660014A054 /* test.cpp */,
 				ED8BA73A186914CE0014A054 /* _710_UFTree.1 */,
-				ED8BA738186914CE0014A054 /* main.cpp */,
 				ED8BA773186916480014A054 /* DLinkedList.cpp */,
-				ED8BA774186916480014A054 /* FPTree.cpp */,
-				ED8BA775186916480014A054 /* FPTreeItem.cpp */,
-				ED8BA776186916480014A054 /* FPTreeNode.cpp */,
-				ED8BA777186916480014A054 /* HeaderItem.cpp */,
-				ED8BA778186916480014A054 /* HeaderItemList.cpp */,
-				ED8BA779186916480014A054 /* HeaderTable.cpp */,
-				ED8BA77A186916480014A054 /* NodeLL.cpp */,
-				ED8BA77B186916480014A054 /* OrderedData.cpp */,
-				ED8BA77C186916480014A054 /* TransPathItem.cpp */,
 				ED8BA767186916320014A054 /* DLinkedList.hpp */,
 				ED8BA768186916320014A054 /* FPContants.hpp */,
+				ED8BA774186916480014A054 /* FPTree.cpp */,
 				ED8BA769186916320014A054 /* FPTree.hpp */,
+				ED8BA775186916480014A054 /* FPTreeItem.cpp */,
 				ED8BA76A186916320014A054 /* FPTreeItem.hpp */,
+				ED8BA776186916480014A054 /* FPTreeNode.cpp */,
 				ED8BA76B186916320014A054 /* FPTreeNode.hpp */,
+				ED8BA777186916480014A054 /* HeaderItem.cpp */,
 				ED8BA76C186916320014A054 /* HeaderItem.hpp */,
+				ED8BA778186916480014A054 /* HeaderItemList.cpp */,
 				ED8BA76D186916320014A054 /* HeaderItemList.hpp */,
+				ED8BA779186916480014A054 /* HeaderTable.cpp */,
 				ED8BA76E186916320014A054 /* HeaderTable.hpp */,
+				ED8BA738186914CE0014A054 /* main.cpp */,
+				ED8BA77A186916480014A054 /* NodeLL.cpp */,
 				ED8BA76F186916320014A054 /* NodeLL.hpp */,
+				ED8BA77B186916480014A054 /* OrderedData.cpp */,
 				ED8BA770186916320014A054 /* OrderedData.hpp */,
+				ED8BA789186916660014A054 /* test.cpp */,
+				ED8BA788186916660014A054 /* test.h */,
+				ED8BA77C186916480014A054 /* TransPathItem.cpp */,
 				ED8BA771186916320014A054 /* TransPathItem.hpp */,
 			);
 			path = "4710-UFTree";
-			sourceTree = "<group>";
-		};
-		ED8BA78B18692A1B0014A054 /* test_files */ = {
-			isa = PBXGroup;
-			children = (
-				ED8BA78C18692A8A0014A054 /* un_test1.txt */,
-			);
-			name = test_files;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +239,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -265,7 +271,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -303,6 +309,7 @@
 				ED8BA740186914CE0014A054 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

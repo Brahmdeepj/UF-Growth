@@ -30,6 +30,7 @@ using namespace std;
 //                  from a given data set.
 //
 //-----------------------------------------------------------
+int k_level_itemset_counts[MAX_DOMAIN_ITEMS];
 
 // private helper method for findFreqItems()
 void getPrefix(int i, string &str, string &result)
@@ -52,9 +53,13 @@ void getPrefix(int i, string &str, string &result)
 }
 
 // finds all the permutations of a given single path items
-void findFreqItems(int k, vector<string> *items, string label, int labelSize)
+void findFreqItems(int k, vector<string> *items, string label, int labelSize, int showFPs)
 {
     vector<string> *fitems = new vector<string>;
+    string formattedLabel;
+    
+    if (label != "")
+        formattedLabel = label + ",";
     
     if(k==1)
     {
@@ -62,19 +67,20 @@ void findFreqItems(int k, vector<string> *items, string label, int labelSize)
         {
             string curri = items->at(i);
             
-            cout << "{" << items->at(i) << "} occurred - " << endl; //DEBUG
+            //record - relative 1-itemset
+            k_level_itemset_counts[labelSize+k-1]++;
+            
+            if (showFPs == 1)
+                cout << "{" << formattedLabel << items->at(i) << "}" << endl;
             
             for (int j=i+1; j<items->size(); j++) {
                 string currj = items->at(j);
                 string joint = curri + "," + currj;
                 fitems->push_back(joint);
-                
-                // DEBUG Print K-2 items
-                cout << "fitem: " <<  joint << endl;
             }
         }
         
-    }if(k>1) {
+    }else if(k>1) {
         for(int i=0; i<items->size(); i++)
         {
             string curri = items->at(i);
@@ -90,14 +96,11 @@ void findFreqItems(int k, vector<string> *items, string label, int labelSize)
                 string currjPrefix;
                 getPrefix(k-1, currj, currjPrefix);
                 
-                if(prefix.compare(currjPrefix)==0)
+                if (prefix.compare(currjPrefix)==0)
                 {
                     string joint = curri + "," + currj.substr(currjPrefix.length() + 1);
                     fitems->push_back(joint);
-                    
-                    // DEBUG Print K>2 items
-                    cout << "-->fitem: " <<  joint << endl;
-                }else
+                } else
                 {
                     matches = false;
                 }
@@ -107,18 +110,38 @@ void findFreqItems(int k, vector<string> *items, string label, int labelSize)
         }
     }
     
-    if(fitems->size()>1)
+    //record - relative k-itemsets, where k>1
+    for (int i=0; i<fitems->size(); i++)
     {
-        findFreqItems(k+1, fitems, label, labelSize);
+        k_level_itemset_counts[labelSize+k]++;
+        
+        if (showFPs == 1)
+            cout << "{" << formattedLabel << fitems->at(i) << "}" << endl; //DEBUG
     }
+    
+    
+    if (fitems->size()>1)
+    {
+        findFreqItems(k+1, fitems, label, labelSize, showFPs);
+    }
+
 }
 
-void FPGrowthMine(FPTree* tree, int option)
+void UFPGrowthMine(FPTree* tree, int showFPs, int countFPs)
 {
+    //record - relative 0-itemset
+    if (tree->getBaseLevel() > 0 && tree->getLabelPrefix() != "")
+    {
+        k_level_itemset_counts[tree->getBaseLevel()-1]++;
+        
+        if (showFPs == 1)
+            cout << "{" << tree->getLabelPrefix() << "}" << endl;
+    }
+    
     if(tree->isEmpty() || tree->isSinglePath())
     {
         vector<string> *singletons = tree->getSinglePath();
-        findFreqItems(1, singletons, tree->getLabelPrefix(), tree->getBaseLevel());
+        findFreqItems(1, singletons, tree->getLabelPrefix(), tree->getBaseLevel(), showFPs);
     } else
     {
     	HeaderTable *headerTable = tree->getHeaderTable();
@@ -147,6 +170,7 @@ void FPGrowthMine(FPTree* tree, int option)
                 path = paths[currPathIndex];
                 
                 int currNodeSupport = currSimilarNode->getData()->getSupport();
+                float currNodeProb = currSimilarNode->getData()->getProbability();
                 
                 // generates a path by chasing the parent pointers
                 FPTreeNode *parent = currSimilarNode->getParent();
@@ -158,7 +182,11 @@ void FPGrowthMine(FPTree* tree, int option)
                     NodeLL* addedPathNode = paths[currPathIndex]->addToFront(pathItem);
                     
                     // add to header table
-                    HeaderItem *hItem = projHeader->insertByExpSupport(dataItem->getData(), dataItem->getSupport(), dataItem->getProbability());
+                    HeaderItem *hItem = projHeader->insertByExpSupport(
+                                                                       dataItem->getData(),
+                                                                       currNodeSupport,
+                                                                       dataItem->getProbability(),
+                                                                       currNodeProb);
                     hItem->linkNextPath(addedPathNode);
                     
                     parent = parent->getParent();
@@ -170,9 +198,18 @@ void FPGrowthMine(FPTree* tree, int option)
                 
             } // end - all paths generation loop
             
+            
+//            // DEBUG Print
+//            cout << "before pruning currHeaderItem " << headerItem->getData()->getData() << endl;
+//            projHeader->printTable();
+            
             // this removes all the infrequent items from the header table
             // while also filtering out the infrequents from the paths
             projHeader->removeInfrequent();
+            
+//            // DEBUG Print
+//            cout << "after pruning currHeaderItem " << headerItem->getData()->getData() << endl;
+//            projHeader->printTable();
             
             //insert all paths and DELETE them
             for (int i=0; i<headerItem->getSimilarNodeCount(); i++)
@@ -183,7 +220,15 @@ void FPGrowthMine(FPTree* tree, int option)
                 delete(paths[i]);
             }
             
-            FPGrowthMine(newProjTree, option);
+//            // DEBUG Print
+//            if(!newProjTree->isEmpty()) {
+//    
+//                cout << "\nItem: " << headerItem->getData()->getData() << " singlePath:" << newProjTree->isSinglePath() << endl ;
+//                newProjTree->printTree();
+//                cout << endl;
+//            }
+            
+            UFPGrowthMine(newProjTree, showFPs, countFPs);
             
             // going backwards from lowest to highest order
             currHeaderNode = currHeaderNode->getPrev();
@@ -218,25 +263,92 @@ FPTree* processFile(string fileName, float minSup)
 
 int main(int argc, const char * argv[])
 {
-    if (argc == 4)
+    clock_t start;
+    double duration;
+    
+    if (argc == 7)
     {
         string fileName = argv[1];
-        float minSup = atoi(argv[2]);
-        int option = atoi(argv[3]);
+        int minSup = atoi(argv[2]);
         
-        fileName = "/Users/brahmdeepjuneja/Desktop/un_test1.txt";
-        minSup = 0;
+        int showFPs = atoi(argv[3]);
+        int showTime = atoi(argv[4]);
+        int countFPs = atoi(argv[5]);
+        int countNodes = atoi(argv[6]);
         
-        cout << "===== FP-growth TDB=" << fileName << " minsup=" << minSup << " =====" << endl;
+        //**** DEBUG only ****
+        showFPs = 0;
+        showTime = 1;
+        countFPs = 1;
+        countNodes = 0;
+        minSup = 0.5f;
+        
+        cout << "===== FP-growth TDB=" << fileName
+        << " minsup=" << minSup
+        << " showFPs=" << showFPs
+        << " showTime=" << showTime
+        << " countFPs=" << countFPs
+        << " countNodes=" << countNodes
+        << " =====" << endl;
+        
+        memset(k_level_itemset_counts, 0, (sizeof(int) * MAX_DOMAIN_ITEMS) );
+        
+        if (showFPs == 1)
+            cout << "---------showFPs=" << showFPs << "-----------" << endl;
+        
+        //----------START---------
+        start = clock();
+        
         FPTree* globalTree = processFile(fileName, minSup); //read, create, and mine tree
-//        FPGrowthMine(globalTree, option);
-        cout << "=====================================================================" << endl;
+        UFPGrowthMine(globalTree, showFPs, countFPs);
+        
+        //----------END-------
+        duration = (clock() - start) / (double)  CLOCKS_PER_SEC;
+        
+        if (showFPs == 1)
+            cout << endl;
+        
+        if (showTime == 1)
+        {
+            cout << "--------showTime=" << showTime << "----------" << endl;
+            cout << "runtime = " << duration << endl << endl;
+        }
+        
+        if (countFPs == 1)
+        {
+            cout << "--------countFPs=" << countFPs << "-----------" << endl;
+            for (int i=0; i<MAX_DOMAIN_ITEMS && k_level_itemset_counts[i] != 0; i++)
+                cout << "|L" << i+1 << "| = " << k_level_itemset_counts[i] << endl;
+            cout << endl;
+        }
+        
+        if (countNodes == 1)
+        {
+            cout << "------countNodes=" << countNodes << "----------"<< endl;
+            cout << "total globalNodes = " << globalTree->totalTreeNodes() << endl;
+            cout << endl;
+        }
+        
+        cout << "===== FP-growth TDB=" << fileName
+        << " minsup=" << minSup
+        << " showFPs=" << showFPs
+        << " showTime=" << showTime
+        << " cntFPs=" << countFPs
+        << " cntNodes=" << countNodes
+        << ": Completed =====" << endl;
     } else
     {
-        cout << "Invalid parameters - must have <filename> <minsup>";
+        cout << "Invalid parameters "                                               << endl
+        << "Usage: FPgrowth TDB minsup showFPs showTime cntFPs cntNodes"    << endl
+        << "minsup   INTEGER"                                           << endl
+        << "showFPs  0(No) or 1(Yes) to show all FPs with sup"          << endl
+        << "showTime 0(No) or 1(Yes) to show runtime"                   << endl
+        << "cntFPs   0(No) or 1(Yes) to count #FPs (k-itemsets for each k and total #FPs)" << endl
+        << "cntNodes 0(No) or 1(Yes) to count #nodes"                   << endl
+        << endl;
     }
     
-    cout << "\nEnd of processing.\n";
+    cout << endl << "End of processing." << endl;
     
     return EXIT_SUCCESS;
 }

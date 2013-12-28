@@ -29,6 +29,8 @@ private:
     
 public:
     HeaderItem(FPTreeItem *data);
+    HeaderItem(FPTreeItem *data, float baseProbability);
+    
     virtual ~HeaderItem();
     void removeInfreqPathItems();
     

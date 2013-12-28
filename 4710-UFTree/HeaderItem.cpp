@@ -26,7 +26,20 @@ HeaderItem::HeaderItem(FPTreeItem *data){
     this->data = data;
     this->firstSimilarTreeNode = NULL;
     this->firstPathNode = NULL;
-    this->expSupport = data->getProbability();
+    
+    // must be multiplied by support when building paths from projected trees
+    // for global header table - support is always 1 because paths are read from file
+    this->expSupport = data->getProbability() * data->getSupport();
+}
+
+HeaderItem::HeaderItem(FPTreeItem *data, float baseProbability){
+    this->data = data;
+    this->firstSimilarTreeNode = NULL;
+    this->firstPathNode = NULL;
+    
+    // must be multiplied by support when building paths from projected trees
+    // for global header table - support is always 1 because paths are read from file
+    this->expSupport = data->getProbability() * baseProbability * data->getSupport();
 }
 
 HeaderItem::~HeaderItem(){ //requires others to destroy path and tree nodes
@@ -77,7 +90,7 @@ void HeaderItem::removeInfreqPathItems()
  *-----------------------------------------------------------------------------------*/
 void HeaderItem::linkTreeNode(FPTreeNode *treeNode, HeaderItem *hash[MAX_DOMAIN_ITEMS])
 {
-    FPTreeNode *curr = firstSimilarTreeNode;
+    FPTreeNode *curr = this->firstSimilarTreeNode;
     bool done = false;
     
     if(curr==NULL) {
@@ -120,16 +133,26 @@ void HeaderItem::linkNextPath(NodeLL *pathNodeToLink)
 int HeaderItem::compareTo(OrderedData *other)
 {
     HeaderItem *otherItem = dynamic_cast<HeaderItem *>(other);
+    FPTreeItem *otherData = otherItem->getData();
     int result = 1;
     
     if (otherItem != NULL)
     {
-        result = this->expSupport - otherItem->expSupport;
-        
-        if (result < 0){
+        if (this->data->getData() == otherData->getData())
+        {
+            result = 0;
+        } else if(this->getExpSupport() < otherItem->getExpSupport())
+        {
             result = -1;
-        } else if (result > 0){
-            result = 1;
+        } else if(this->getExpSupport() == otherItem->getExpSupport())
+        {
+            if (this->data->getData() < otherData->getData())
+            {
+                result = 1;
+            } else
+            {
+                result = -1;
+            }
         }
     }
     return result;
@@ -193,6 +216,11 @@ int HeaderItem::getSimilarNodeCount()
 NodeLL* HeaderItem::getLastPathNode()
 {
     return lastPathNode;
+}
+
+float HeaderItem::getExpSupport()
+{
+    return expSupport;
 }
 
 //***************** SETTERS ******************

@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <math.h>
 
 #include "FPContants.hpp"
 
@@ -98,8 +99,11 @@ void FPTree::createTree(string fileName, HeaderItem *hash[MAX_DOMAIN_ITEMS])
                 //read entire transaction into array
                 for (int i=0; i<transactionSize; i++)
                 {
-                    dataFile >> temp >> probability;;
-                    tempItem = new FPTreeItem(temp, 1, probability); //temp is later freed
+                    dataFile >> temp >> probability;
+                    
+                    // DEBUG rounded probability
+                    float roundedProb = probability;//floorf(probability * 1000 + 0.5) / 1000;
+                    tempItem = new FPTreeItem(temp, 1, roundedProb); //temp is later freed
                     
                     hashIdx = HeaderTable::getHashIndex(tempItem);
                     if (hash[hashIdx] != NULL)
@@ -147,7 +151,6 @@ void FPTree::createTree(string fileName, HeaderItem *hash[MAX_DOMAIN_ITEMS])
 //                this->insertTransaction(tempPathList);
                 
                 this->insertTransaction(buffer, size, hash);
-                
                 //this->printTree(); //DEBUG
             } while (currTransaction < numTransactions);
         }
@@ -245,6 +248,7 @@ int FPTree::totalTreeNodes(){
 void FPTree::printTree()
 {
     this->root->print(0);
+    cout << endl;
 }
 
 void FPTree::printHeaderTable()
@@ -261,8 +265,11 @@ string FPTree::getLabelPrefix()
     ss << "";
     while (currProj != NULL && currProj->partialPrefix != -1)
     {
-        ss << this->partialPrefix;
+        ss << currProj->partialPrefix;
         currProj = currProj->parentProj;
+        
+        if (currProj != NULL && currProj->partialPrefix != -1)
+            ss << ",";
     }
     
     return ss.str();

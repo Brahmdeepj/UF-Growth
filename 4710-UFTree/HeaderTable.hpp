@@ -35,7 +35,7 @@ public:
     HeaderTable(int minSup);
     virtual ~HeaderTable();
     
-    HeaderItem* insertByExpSupport(int domainItem, int support, float probability);
+    HeaderItem* insertByExpSupport(int domainItem, int support, float probability, float baseProbability);
     bool createHeaderTable(string fileName, HeaderItem *hash[MAX_DOMAIN_ITEMS]);
     void removeInfrequent();
     void printTable();

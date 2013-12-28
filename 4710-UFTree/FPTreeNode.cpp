@@ -241,13 +241,19 @@ int FPTreeNode::compareTo(OrderedData *item){
     } else if (otherFPTreeItem != NULL)
     {
         result = this->data->getData() - otherFPTreeItem->getData();
-        
-        result = this->data->getProbability() - otherFPTreeItem->getProbability();
-        
+                
         if (result < 0)
             result = -1;
         else if (result > 0)
             result = 1;
+        else {
+            if(data->getProbability() > otherFPTreeItem->getProbability())
+                result = 1;
+            else if(data->getProbability() < otherFPTreeItem->getProbability())
+                result = -1;
+            else
+                result = 0;
+        }
     }
     return result;
 }
@@ -289,7 +295,7 @@ void FPTreeNode::print(int level){
     if (this->data == NULL){
         ss << "root";
     } else {
-        ss << this->data->getData() << " : " << this->getData()->getSupport() ;
+        ss << this->data->getData() << ":" << this->getData()->getSupport() << "(" << data->getProbability() << ")" ;
     }
     cout << ss.str() << endl;;
     
